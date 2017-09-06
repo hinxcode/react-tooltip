@@ -241,6 +241,8 @@ class ReactTooltip extends Component {
     const {children, multiline, getContent} = this.props
     const originTooltip = e.currentTarget.getAttribute('data-tip')
     const isMultiline = e.currentTarget.getAttribute('data-multiline') || multiline || false
+    // args of getContent function for passing extra data
+    const args = e.currentTarget.getAttribute('data-extra')
 
     // Generate tootlip content
     let content
@@ -248,7 +250,7 @@ class ReactTooltip extends Component {
       if (Array.isArray(getContent)) {
         content = getContent[0] && getContent[0]()
       } else {
-        content = getContent()
+        content = getContent(args)
       }
     }
     const placeholder = getTipContent(originTooltip, children, content, isMultiline)
